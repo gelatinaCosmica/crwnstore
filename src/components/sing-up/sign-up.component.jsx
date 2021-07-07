@@ -20,6 +20,7 @@ class SignUp extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault();
+
     const { displayName, email, password, confirmPassword } = this.state;
 
     if (password !== confirmPassword) {
@@ -29,7 +30,7 @@ class SignUp extends React.Component {
     try {
       const { user } = await auth.createUserWithEmailAndPassword(email, password);
 
-      createUserProfileDocument(user, { displayName });
+      await createUserProfileDocument(user, { displayName });
 
       this.setState = {
         displayName: '',
@@ -57,12 +58,12 @@ class SignUp extends React.Component {
         <span>Sign up with your email and password</span>
         <form className='sign-up-form' onSubmit={this.handleSubmit}>
           <FormInput
-            type='displayName'
+            type='text'
             name='displayName'
             value={displayName}
             handleChange={this.handleChange}
             label='Display Name'
-            Required
+            required
           />
           <FormInput
             type='email'
@@ -70,25 +71,25 @@ class SignUp extends React.Component {
             value={email}
             handleChange={this.handleChange}
             label='Email'
-            Required
+            required
           />
           <FormInput
             type='password'
             name='password'
             value={password}
             handleChange={this.handleChange}
-            label='password'
-            Required
+            label='Password'
+            required
           />
           <FormInput
             type='password'
             name='confirmPassword'
             value={confirmPassword}
             handleChange={this.handleChange}
-            label='confirm Password'
-            Required
+            label='Confirm Password'
+            required
           />
-          <CustomButton type='submit'>Sign Up</CustomButton>
+          <CustomButton type='submit'>SIGN UP</CustomButton>
         </form>
       </div>
     )
